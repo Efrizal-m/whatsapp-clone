@@ -1,4 +1,10 @@
 class Message < ApplicationRecord
   belongs_to :chatroom
-  after_create_commit { broadcast_append_to "chatroom_#{self.chatroom_id}_messages" }
+  after_create_commit { broadcast_to_chatroom }
+
+  private
+
+  def broadcast_to_chatroom
+    ChatroomChannel.broadcast_to(chatroom, self)
+  end
 end
