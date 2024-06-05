@@ -22,7 +22,7 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatroomId }) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
+        const data = await response.json(); 
         setMessages(data);
       } catch (error: any) {
         setError(error.message);
@@ -31,7 +31,7 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatroomId }) => {
 
     fetchMessages();
 
-    const socket = new WebSocket(`ws://localhost:3000/cable?chatroom_id=${chatroomId}`);
+    const socket = new WebSocket(`ws://localhost:3100/cable?chatroom_id=${chatroomId}`);
 
     socket.onopen = () => {
       socket.send(JSON.stringify({
