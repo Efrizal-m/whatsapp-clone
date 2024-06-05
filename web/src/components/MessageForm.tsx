@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 interface MessageFormProps {
   chatroomId: number;
+  username: string;
 }
 
-const MessageForm: React.FC<MessageFormProps> = ({ chatroomId }) => {
+const MessageForm: React.FC<MessageFormProps> = ({ chatroomId, username }) => {
   const [content, setContent] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -14,7 +15,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ chatroomId }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: { content, chatroom_id: chatroomId } })
+      body: JSON.stringify({ message: { content, chatroom_id: chatroomId, username } })
     });
     setContent('');
   }

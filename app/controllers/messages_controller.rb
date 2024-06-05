@@ -6,17 +6,16 @@ class MessagesController < ApplicationController
   end
 
   def create
-    message = Message.new(message_params)
-    if message.save
-      render json: message, status: :created
-    else
-      render json: { errors: message.errors.full_messages }, status: :unprocessable_entity
-    end
+    chatroom = Chatroom.find(params[:message][:chatroom_id])
+    user = User.find_or_create_by(username: params[:message][:username]) 
+    message = chatroom.messages.create!(message_params.merge(user: user))
+    ChatroomChannel.broadcast_to(chatroom, message)
+    render json: message
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:content, :chatroom_id)
+    params.require(:message).permit(:content, :chatroom_id, :username)
   end
 end

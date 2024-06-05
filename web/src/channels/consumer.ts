@@ -1,5 +1,6 @@
-import { createConsumer } from "@rails/actioncable";
+import { createConsumer } from '@rails/actioncable';
 
-const consumer = createConsumer("ws://localhost:3100/cable");
+const cableUrl = 'ws://localhost:3100/cable';
+const consumer = createConsumer(cableUrl);
 
 export default consumer;

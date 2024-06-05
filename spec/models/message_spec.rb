@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   let(:chatroom) { create(:chatroom) }
-  let(:message) { build(:message, chatroom: chatroom) }
+  let(:user) { create(:user) }
+  let(:message) { build(:message, chatroom: chatroom, user: user) }
 
   before do
     allow(ChatroomChannel).to receive(:broadcast_to)
