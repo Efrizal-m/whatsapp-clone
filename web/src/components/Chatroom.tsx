@@ -82,14 +82,31 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatroomId, username }) => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  console.log(messages,'<<<S')
+
   return (
-    <div>
-      <h1>Chatroom</h1>
-      <div id="messages">
-        {messages.map((message) => (
-          <p key={message.id}>{message.username} - {message.content}</p>
-        ))}
+    <div className="flex flex-col h-screen bg-gray-100">
+      <div className="flex-grow p-4 overflow-y-auto">
+        <div className="flex flex-col space-y-4">
+          <h1>Username - Message</h1>
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`flex ${
+                message.username == username ? 'justify-end' : 'justify-start'
+              }`}
+            >
+              <div
+                className={`p-3 rounded-lg max-w-xs ${
+                  message.username == username
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-300 text-black'
+                }`}
+              >
+                {message.username} - {message.content}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <MessageForm chatroomId={chatroomId} username={username}/>
     </div>
