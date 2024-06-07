@@ -1,24 +1,23 @@
-# README
+# WHATSAPP CLONE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run it locallly
 
-Things you may want to cover:
+## Backend
 
-* Ruby version
+```
+rails db:migrate
 
-* System dependencies
+rails console
+Chatroom.create(name: "General")
+exit
 
-* Configuration
+rails server
+```
 
-* Database creation
+## Frontend
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+cd web
+npm i
+npm run dev
+```
